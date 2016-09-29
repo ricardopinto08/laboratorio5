@@ -5,6 +5,16 @@
     <h:head></h:head>
 
     <h:body>
+        <h:form>
+            <h:outputText value="#{Foros.foros.get(0).titulo}" style="font-size-adjust: 3" ></h:outputText> 
+            <br></br>
+            <h:outputText value="Autor: #{Foros.foros.get(0).autor}" style="color: gray " ></h:outputText>
+            <br></br>
+            <h:outputText value="#{Foros.foros.get(0).fechayHora}" style="color: gray" ></h:outputText>
+            <br></br>
+            <h:outputText value="#{Foros.foros.get(0).comentario}"></h:outputText>
+        </h:form>
+        
         
     </h:body>
 
