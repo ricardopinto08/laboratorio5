@@ -67,8 +67,13 @@ public class ServiciosForoStub extends ServiciosForo{
 
     @Override
     public void agregarRespuestaForo(int idforo, Comentario c) throws ExcepcionServiciosForos {
-        EntradaForo f=foros.get(idforo);
-        f.getRespuestas().add(c);
+        try{
+            EntradaForo f=foros.get(idforo);
+            f.getRespuestas().add(c);
+        }catch (Exception ex){
+            throw new ExcepcionServiciosForos("Foro no encontrado, rectifique e intente de nuevo.");
+        }
+        
     }
 
     @Override

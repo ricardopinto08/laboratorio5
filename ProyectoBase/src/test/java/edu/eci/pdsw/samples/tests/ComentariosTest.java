@@ -78,9 +78,18 @@ public class ComentariosTest {
     }
     
     @Test
-    public void registroPacienteTest() throws ExcepcionServiciosForos{
+    public void registroComentarioTest() throws ExcepcionServiciosForos{
         Comentario c= new Comentario(us, "El rappi de hoy fue bueno : 6 Iphone 7 de 128GB y 3 Samsung S7 edge.", java.sql.Date.valueOf("2012-01-11"));
         principal.agregarRespuestaForo(ef.getIdentificador(),c);
+    }
+    
+    @Test
+    public void registroNoComentarioTest() throws ExcepcionServiciosForos{
+        /* ¡¡¡¡esta prueba deberia fallar, ya que el identificador no corresponde a una EntradaForo
+           POR ENDE RETORNARA DICHA EXCEPCION!!!! 
+        */
+        Comentario c= new Comentario(us, "El rappi de hoy fue bueno : 6 Iphone 7 de 128GB y 3 Samsung S7 edge.", java.sql.Date.valueOf("2012-01-11"));
+        principal.agregarRespuestaForo(23,c);
     }
     
     
