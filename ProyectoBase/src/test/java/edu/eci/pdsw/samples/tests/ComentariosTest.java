@@ -85,11 +85,23 @@ public class ComentariosTest {
     
     @Test
     public void registroNoComentarioTest() throws ExcepcionServiciosForos{
-        /* ¡¡¡¡esta prueba deberia fallar, ya que el identificador no corresponde a una EntradaForo
-           POR ENDE RETORNARA DICHA EXCEPCION!!!! 
-        */
         Comentario c= new Comentario(us, "El rappi de hoy fue bueno : 6 Iphone 7 de 128GB y 3 Samsung S7 edge.", java.sql.Date.valueOf("2012-01-11"));
-        principal.agregarRespuestaForo(23,c);
+        try {
+            principal.agregarRespuestaForo(23,c);
+        } catch (Exception e) {
+            assertEquals(e.getMessage(),"Foro no encontrado, rectifique e intente de nuevo." );
+        }
+         
+    }
+    
+    @Test
+    public void consultarUsuarioNoRegistradoTest() throws ExcepcionServiciosForos{
+        try {
+            principal.consultarUsuario("carlos.ramirez-ot@hotmail.com");
+        } catch (Exception e) {
+            assertEquals(e.getMessage(),"El correo carlos.ramirez-ot@hotmail.com no se encuentra registrado.");
+        }
+         
     }
     
     
