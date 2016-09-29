@@ -6,23 +6,23 @@
 
     <h:body>
          <h:form>
-             <p:dataTable var="pro" value="#{Foros.foros}">
-                <p:column headerText="Id">
-                    <h:outputText value="#{pro.identificador}" />
+             <p:dataTable var="foro"  value="#{Foros.foros}" selectionMode="single" selection="#{Foros.foroSelection}" rowKey="#{foro}">
+                <p:column headerText="Identificador">
+                    <h:outputText value="#{foro.identificador}" />
                 </p:column>
 
                 <p:column headerText="Autor">
-                    <h:outputText value="#{pro.autor}" />
+                    <h:outputText value="#{foro.autor.nombre}" />
                 </p:column>
 
                 <p:column headerText="Titulo">
-                    <h:outputText value="#{pro.titulo}" />
+                    <h:outputText value="#{foro.titulo}" />
                 </p:column>
-                <p:column headerText="Titulo">
-                    <h:outputText value="#{pro.fechayHora}" />
+                <p:column headerText="Fecha y Hora">
+                    <h:outputText value="#{foro.fechayHora}" />
                 </p:column>
             </p:dataTable>
-            <p:commandButton action="carrito" title="My cart" value = "My cart" >
+            <p:commandButton action="registrorespuestaforo" icon="ui-icon-search" title="Ver Foro" value = "VerForo" >
             </p:commandButton>
            
         </h:form>

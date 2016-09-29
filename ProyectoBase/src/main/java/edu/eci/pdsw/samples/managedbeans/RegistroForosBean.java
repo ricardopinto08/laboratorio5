@@ -34,6 +34,15 @@ import javax.faces.bean.SessionScoped;
 public class RegistroForosBean implements Serializable{
     
     ServiciosForo foros=ServiciosForo.getInstance();
+    EntradaForo foroSelection;
+
+    public EntradaForo getForoSelection() {
+        return foroSelection;
+    }
+
+    public void setForoSelection(EntradaForo foroSelection) {
+        this.foroSelection = foroSelection;
+    }
     
     
     public List<EntradaForo> getForos() throws ExcepcionServiciosForos{
