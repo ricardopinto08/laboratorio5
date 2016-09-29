@@ -5,7 +5,27 @@
     <h:head></h:head>
 
     <h:body>
-        
-    </h:body>
+         <h:form>
+             <p:dataTable var="pro" value="#{Foros.foros}">
+                <p:column headerText="Id">
+                    <h:outputText value="#{pro.identificador}" />
+                </p:column>
+
+                <p:column headerText="Autor">
+                    <h:outputText value="#{pro.autor}" />
+                </p:column>
+
+                <p:column headerText="Titulo">
+                    <h:outputText value="#{pro.titulo}" />
+                </p:column>
+                <p:column headerText="Titulo">
+                    <h:outputText value="#{pro.fechayHora}" />
+                </p:column>
+            </p:dataTable>
+            <p:commandButton action="carrito" title="My cart" value = "My cart" >
+            </p:commandButton>
+           
+        </h:form>
+   </h:body>
 
 </html>

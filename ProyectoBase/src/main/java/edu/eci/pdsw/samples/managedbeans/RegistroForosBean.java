@@ -17,20 +17,26 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 
+import edu.eci.pdsw.samples.entities.EntradaForo;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosForos;
 import edu.eci.pdsw.samples.services.ServiciosForo;
 import java.io.Serializable;
-import javax.annotation.ManagedBean;
-import javax.enterprise.context.SessionScoped;
+import java.util.List;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author hcadavid
  */
-@ManagedBean
+@ManagedBean (name= "Foros")
 @SessionScoped
 public class RegistroForosBean implements Serializable{
     
-    ServiciosForo sp=ServiciosForo.getInstance();
+    ServiciosForo foros=ServiciosForo.getInstance();
     
     
+    public List<EntradaForo> getForos() throws ExcepcionServiciosForos{
+        return foros.consultarEntradasForo();
+    }
 }
