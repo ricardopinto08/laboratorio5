@@ -64,6 +64,8 @@ import static org.junit.Assert.*;
 
 public class EntradasForoTest {
     ServiciosForoStub principal;
+    EntradaForo ef;
+    Usuario us;
     
     public EntradasForoTest() {
     }
@@ -71,14 +73,29 @@ public class EntradasForoTest {
     @Before
     public void setUp() {
         principal = new ServiciosForoStub();
+        us = new Usuario("pepitoperez@gmail.com", "Pepito Perez");
+        ef = new EntradaForo(12, us, "Nueva entrada", "Entrada correcta", java.sql.Date.valueOf("2010-03-01"));
     }
     
     
     @Test
     public void registroPacienteTest() throws ExcepcionServiciosForos{
-        Usuario us = new Usuario("pepitoperez@gmail.com", "Pepito Perez");
-        EntradaForo ef = new EntradaForo(12, us, "Nueva entrada", "Entrada correcta", java.sql.Date.valueOf("2010-03-01"));
+        
         principal.registrarNuevaEntradaForo(ef);
+    }
+    
+    @Test
+    public void consultarEntradaConIdInexistente() throws ExcepcionServiciosForos{
+        try{
+            principal.consultarEntradaForo(512);
+        }catch(Exception e){
+            assertEquals(e.getMessage(), "Entrada a foro inexistente:512");
+        }
+    }
+    
+    @Test
+    public void deberiaConsultarTodasLasEntradasForo() throws ExcepcionServiciosForos{
+        principal.consultarEntradasForo();
     }
     
     

@@ -79,6 +79,7 @@ public class ServiciosForoStub extends ServiciosForo{
     @Override
     public Usuario consultarUsuario(String email) throws ExcepcionServiciosForos {
         return usuarios.get(email);
+        
     }
     
     
