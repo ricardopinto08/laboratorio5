@@ -16,6 +16,11 @@
  */
 package edu.eci.pdsw.samples.tests;
 
+import edu.eci.pdsw.samples.entities.Comentario;
+import edu.eci.pdsw.samples.entities.EntradaForo;
+import edu.eci.pdsw.samples.entities.Usuario;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosForos;
+import edu.eci.pdsw.samples.services.ServiciosForoStub;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -23,19 +28,59 @@ import static org.junit.Assert.*;
 /**
  *
  * @author hcadavid
+ * 
+ * 
+ * 
+ * CLASES DE EQUIVALENCIA
+ * 1)
+ * 
+ * Condicion de entrada:
+ * idForo
+ * 
+ * Tipo:
+ * Comentario asociado a un idForo 
+ * 
+ * Clase de equivalencia valida:
+ * Crear Comentario creando un Foro ahi mismo
+ * 
+ * Clase de equivalencia invalida:
+ * Crear Comentario asociado un Foro inexistente
+ * 
+ * ----------------------------------------------------------
+ * 
+ * 2)
+ * 
+ * Condicion de entrada:
+ * Comentario
+ * 
+ * Tipo:
+ * Comentario Con formato de fecha correcto
+ * 
+ * Clase de equivalencia valida:
+ * Utilizar un formato de fecha valido
+ * 
+ * Clase de equivalencia invalida:
+ * Utilizar una fecha incoherente
  */
 public class ComentariosTest {
-    
+    ServiciosForoStub principal;
+    EntradaForo ef;
+    Usuario us;
     public ComentariosTest() {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() throws ExcepcionServiciosForos {
+        principal = new ServiciosForoStub();
+        us = new Usuario("ElOsCarComuna13@gmail.com", "Oscar Alba");
+        ef = new EntradaForo(12, us, "dfasdjfhl", "sdfjaskdfh", java.sql.Date.valueOf("2011-12-01"));
+        principal.registrarNuevaEntradaForo(ef);
     }
     
     @Test
-    public void registroPacienteTest(){
-        
+    public void registroPacienteTest() throws ExcepcionServiciosForos{
+        Comentario c= new Comentario(us, "El rappi de hoy fue bueno : 6 Iphone 7 de 128GB y 3 Samsung S7 edge.", java.sql.Date.valueOf("2012-01-11"));
+        principal.agregarRespuestaForo(ef.getIdentificador(),c);
     }
     
     

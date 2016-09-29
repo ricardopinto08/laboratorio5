@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.tests;
 
 import edu.eci.pdsw.samples.entities.*;
+import edu.eci.pdsw.samples.services.ExcepcionServiciosForos;
 import edu.eci.pdsw.samples.services.ServiciosForoStub;
 import java.sql.Date;
 import org.junit.Before;
@@ -74,9 +75,10 @@ public class EntradasForoTest {
     
     
     @Test
-    public void registroPacienteTest(){
+    public void registroPacienteTest() throws ExcepcionServiciosForos{
         Usuario us = new Usuario("pepitoperez@gmail.com", "Pepito Perez");
         EntradaForo ef = new EntradaForo(12, us, "Nueva entrada", "Entrada correcta", java.sql.Date.valueOf("2010-03-01"));
+        principal.registrarNuevaEntradaForo(ef);
     }
     
     
