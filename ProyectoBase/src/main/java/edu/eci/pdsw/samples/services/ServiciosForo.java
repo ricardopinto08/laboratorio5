@@ -28,9 +28,9 @@ import java.util.Set;
  *
  * @author hcadavid
  */
-public abstract class ServiciosForo  implements Serializable{
-    
-    
+
+public abstract class ServiciosForo implements Serializable{
+
     private static ServiciosForo instance=new ServiciosForoStub();
     
     

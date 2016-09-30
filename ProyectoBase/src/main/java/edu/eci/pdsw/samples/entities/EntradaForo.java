@@ -27,7 +27,9 @@ import java.util.Set;
  *
  * @author hcadavid
  */
-public class EntradaForo  implements Serializable{
+
+public class EntradaForo implements Serializable{
+
     
     private int identificador;
     

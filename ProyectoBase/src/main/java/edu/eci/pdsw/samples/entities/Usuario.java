@@ -22,7 +22,8 @@ import java.io.Serializable;
  *
  * @author hcadavid
  */
-public class Usuario  implements Serializable{
+public class Usuario implements Serializable{
+
     
     private String email;
     

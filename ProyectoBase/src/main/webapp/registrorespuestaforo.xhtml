@@ -8,14 +8,14 @@
         <h:form>
             <h:outputText value="#{Foros.foroSelection.titulo}" style="font-size-adjust: 4" ></h:outputText> 
             <br></br>
-            <h:outputText value="Autor: #{Foros.foroSelection.autor}" style="color: gray " ></h:outputText>
+            <h:outputText value="Autor: #{Foros.foroSelection.autor.nombre}" style="color: gray " ></h:outputText>
             <br></br>
             <h:outputText value="#{Foros.foroSelection.fechayHora}" style="color: gray" ></h:outputText>
             <br></br>
             <h:outputText value="#{Foros.foroSelection.comentario}"></h:outputText>
-            <p:dataTable var="ans" value ="#{Foros.foroSelection.respuestasArreglo}">
+            <p:dataTable id="tablaPrincipal" var="ans" value ="#{Foros.foroSelection.respuestasArreglo}">
                 <p:column headerText="Autor">
-                    <h:outputText value="#{ans.autor}" />
+                    <h:outputText value="#{ans.autor.nombre}" />
                 </p:column>
                 <p:column headerText="Contenido">
                     <h:outputText value="#{ans.contenido}" />
@@ -24,7 +24,20 @@
                     <h:outputText value="#{ans.fechayHora}" />
                 </p:column>
             </p:dataTable>
-            <p:commandButton action="registroentradaforo" icon="ui-icon-left-bold" title="Volver a foros"  value="Volver a foros" actionListener="#{Foros.limpiar()}">
+            <h:panelGrid columns="2" cellpadding="4">
+                <p:outputLabel for="name" value="Nombre del autor: " />
+                <p:inputText id="name" value="#{Foros.comentarioTemporal.autor.nombre}"/>
+
+                <p:outputLabel for="email" value="Email del autor: " />
+                <p:inputText id="email" value="#{Foros.comentarioTemporal.autor.nombre}"/>
+                
+                <p:outputLabel for="Comment" value="Comentario: " />
+                <p:inputText id="Comment" value="#{Foros.comentarioTemporal.contenido}"/>
+                <p:commandButton value="Comentar" actionListener="#{Foros.registrarNuevoComentarioForo(Foros.foroSelection.identificador)}" update="tablaPrincipal">
+                    
+                </p:commandButton>
+            </h:panelGrid>
+            <p:commandButton action="registroentradaforo" icon="ui-icon-arrowrefresh-1-w" title="Volver a foros"  value="Volver a foros" actionListener="#{Foros.limpiar()}">
             </p:commandButton>
         </h:form>
         

@@ -5,10 +5,8 @@
     <h:head></h:head>
 
     <h:body>
-         <h:form>
+        <h:form id="form">
              <p:dataTable id="ListaForos" var="foro"  value="#{Foros.foros}" selectionMode="single" selection="#{Foros.foroSelection}" rowKey="#{foro}">
-                 <p:ajax event="rowSelect" />
-                <p:ajax event="rowUnselect" />
                 <p:column headerText="Identificador">
                     <h:outputText value="#{foro.identificador}" />
                 </p:column>
@@ -22,12 +20,12 @@
                     <h:outputText value="#{foro.fechayHora}" />
                 </p:column>
                 <p:column>
-                    <p:commandButton action="registrorespuestaforo" icon="ui-icon-search" title="Ver Foro" value = "Ver Foro" >
+                    <p:commandButton action="registrorespuestaforo"  icon="ui-icon-search" title="Ver Foro" value = "Ver Foro" actionListener="#{Foros.setForoSelection(foro)}">
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
              
-            <h:panelGrid columns="2" cellpadding="4">
+            <h:panelGrid id="ingresar" columns="2" cellpadding="4">
                 <p:outputLabel for="name" value="Nombre:" />
                 <p:inputText id="name" value="#{Foros.nombreUs}"/>
 
@@ -40,7 +38,6 @@
                 <p:outputLabel for="Title" value="Titulo:" />
                 <p:inputText id="Title" value="#{Foros.title}"/>
 
-                <p:commandButton value="Reset" type="reset" />
                 <p:commandButton value="Añadir nuevo Foro" update="ListaForos" actionListener="#{Foros.registrarNuevoForo()}"/>
             </h:panelGrid>
         </h:form>

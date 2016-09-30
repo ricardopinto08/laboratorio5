@@ -32,7 +32,9 @@ import java.util.logging.Logger;
  *
  * @author hcadavid
  */
-public class ServiciosForoStub extends ServiciosForo  implements Serializable{
+
+public class ServiciosForoStub extends ServiciosForo implements Serializable{
+
 
     private final Map<String,Usuario> usuarios;
     private final Map<Integer,EntradaForo> foros;

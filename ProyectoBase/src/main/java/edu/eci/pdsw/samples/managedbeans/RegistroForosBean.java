@@ -17,6 +17,7 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 
+import edu.eci.pdsw.samples.entities.Comentario;
 import edu.eci.pdsw.samples.entities.EntradaForo;
 import edu.eci.pdsw.samples.entities.Usuario;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosForos;
@@ -37,12 +38,23 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean (name= "Foros")
 @SessionScoped
 public class RegistroForosBean implements Serializable{
+
     
-    ServiciosForo foros=ServiciosForo.getInstance();
-    EntradaForo foroSelection;
+    
+
     private String emailUs;
     private String nombreUs,CommentUs,Title;
-
+    private Comentario comentarioTemporal;
+    private Usuario usuarioTemporal;
+    ServiciosForo foros=ServiciosForo.getInstance();
+    EntradaForo foroSelection;
+    
+    
+    public RegistroForosBean() {
+        usuarioTemporal= new Usuario("", "");
+        comentarioTemporal = new Comentario(usuarioTemporal, "",java.sql.Date.valueOf("2000-01-01"));
+    }
+    
     public String getTitle() {
         return Title;
     }
@@ -75,7 +87,6 @@ public class RegistroForosBean implements Serializable{
         this.nombreUs = nombreUs;
     }
     
-
     public EntradaForo getForoSelection() {
         return foroSelection;
     }
@@ -89,8 +100,30 @@ public class RegistroForosBean implements Serializable{
         return foros.consultarEntradasForo();
     }
     
+    public Comentario getComentarioTemporal() {
+        return comentarioTemporal;
+    }
+
+    public void setComentarioTemporal(Comentario comentarioTemporal) {
+        this.comentarioTemporal = comentarioTemporal;
+    }
+
+    public Usuario getUsuarioTemporal() {
+        return usuarioTemporal;
+    }
+
+    public void setUsuarioTemporal(Usuario usuarioTemporal) {
+        this.usuarioTemporal = usuarioTemporal;
+    }
+    
     public void limpiar(){
         foroSelection=null;
+    }
+           
+    public void registrarNuevoComentarioForo(int idForo) throws ExcepcionServiciosForos{
+        foros.agregarRespuestaForo(idForo, comentarioTemporal);
+        usuarioTemporal= new Usuario("", "");
+        comentarioTemporal = new Comentario(usuarioTemporal, "",java.sql.Date.valueOf("2000-01-01")); 
     }
     
     public void registrarNuevoForo() throws ExcepcionServiciosForos{
@@ -100,7 +133,7 @@ public class RegistroForosBean implements Serializable{
              foros.registrarUsuario(us);
              foros.registrarNuevaEntradaForo(new EntradaForo(0, us, CommentUs, Title,new Date(new java.util.Date().getTime())));
         } catch (Exception e) {
-        
+            System.err.println("excepcionnnnn");
         }
        
         
