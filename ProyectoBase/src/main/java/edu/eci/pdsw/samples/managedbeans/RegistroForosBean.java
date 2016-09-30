@@ -17,12 +17,14 @@
 package edu.eci.pdsw.samples.managedbeans;
 
 
+import edu.eci.pdsw.samples.entities.Comentario;
 import edu.eci.pdsw.samples.entities.EntradaForo;
 import edu.eci.pdsw.samples.entities.Usuario;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosForos;
 import edu.eci.pdsw.samples.services.ServiciosForo;
 import edu.eci.pdsw.samples.services.ServiciosForoStub;
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -34,12 +36,23 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean (name= "Foros")
 @SessionScoped
 public class RegistroForosBean implements Serializable{
+
     
-    private ServiciosForo prin;
+    
     private String date;    
     private String emailUs;
     private String nombreUs,CommentUs,Title;
-
+    private Comentario comentarioTemporal;
+    private Usuario usuarioTemporal;
+    ServiciosForo foros=ServiciosForo.getInstance();
+    EntradaForo foroSelection;
+    
+    
+    public RegistroForosBean() {
+        usuarioTemporal= new Usuario("", "");
+        comentarioTemporal = new Comentario(usuarioTemporal, "",java.sql.Date.valueOf("2000-01-01"));
+    }
+    
     public String getTitle() {
         return Title;
     }
@@ -80,8 +93,7 @@ public class RegistroForosBean implements Serializable{
         this.nombreUs = nombreUs;
     }
     
-    ServiciosForo foros=ServiciosForo.getInstance();
-    EntradaForo foroSelection;
+    
 
     public EntradaForo getForoSelection() {
         return foroSelection;
@@ -96,12 +108,34 @@ public class RegistroForosBean implements Serializable{
         return foros.consultarEntradasForo();
     }
     
+    public Comentario getComentarioTemporal() {
+        return comentarioTemporal;
+    }
+
+    public void setComentarioTemporal(Comentario comentarioTemporal) {
+        this.comentarioTemporal = comentarioTemporal;
+    }
+
+    public Usuario getUsuarioTemporal() {
+        return usuarioTemporal;
+    }
+
+    public void setUsuarioTemporal(Usuario usuarioTemporal) {
+        this.usuarioTemporal = usuarioTemporal;
+    }
+    
     public void limpiar(){
         foroSelection=null;
     }
+           
+    public void registrarNuevoComentarioForo(int idForo) throws ExcepcionServiciosForos{
+        foros.agregarRespuestaForo(idForo, comentarioTemporal);
+        usuarioTemporal= new Usuario("", "");
+        comentarioTemporal = new Comentario(usuarioTemporal, "",java.sql.Date.valueOf("2000-01-01")); 
+    }
     
-    public void registrarNuevoForo(){
+    /*public void registrarNuevoForo(){
         
         prin.registrarNuevaEntradaForo(foroSelection);
-    }
+    }*/
 }
