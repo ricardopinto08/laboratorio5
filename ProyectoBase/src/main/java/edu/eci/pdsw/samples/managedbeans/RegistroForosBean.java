@@ -52,7 +52,7 @@ public class RegistroForosBean implements Serializable{
     
     public RegistroForosBean() {
         usuarioTemporal= new Usuario("", "");
-        comentarioTemporal = new Comentario(usuarioTemporal, "",java.sql.Date.valueOf("2000-01-01"));
+        comentarioTemporal = new Comentario(usuarioTemporal, "",new Date(new java.util.Date().getTime()));
     }
     
     public String getTitle() {
@@ -121,12 +121,14 @@ public class RegistroForosBean implements Serializable{
     }
            
     public void registrarNuevoComentarioForo(int idForo) throws ExcepcionServiciosForos{
-        if(!foros.getUsuarios().containsValue(usuarioTemporal)){
-            foros.registrarUsuario(usuarioTemporal.getEmail(), usuarioTemporal.getNombre());
+        if(!(comentarioTemporal.getAutor().getEmail().equals("") && comentarioTemporal.getAutor().getNombre().equals("") && comentarioTemporal.getContenido().equals(""))){
+            if(!foros.getUsuarios().containsValue(usuarioTemporal)){
+                foros.registrarUsuario(usuarioTemporal);
+            }
+            foros.agregarRespuestaForo(idForo, comentarioTemporal);
+            usuarioTemporal= new Usuario("", "");
+            comentarioTemporal = new Comentario(usuarioTemporal, "",new Date(new java.util.Date().getTime())); 
         }
-        foros.agregarRespuestaForo(idForo, comentarioTemporal);
-        usuarioTemporal= new Usuario("", "");
-        comentarioTemporal = new Comentario(usuarioTemporal, "",java.sql.Date.valueOf("2000-01-01")); 
     }
     
     public void registrarNuevoForo() throws ExcepcionServiciosForos{
