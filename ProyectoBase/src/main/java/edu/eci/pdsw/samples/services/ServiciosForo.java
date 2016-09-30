@@ -19,6 +19,7 @@ package edu.eci.pdsw.samples.services;
 import edu.eci.pdsw.samples.entities.Comentario;
 import edu.eci.pdsw.samples.entities.EntradaForo;
 import edu.eci.pdsw.samples.entities.Usuario;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ import java.util.Set;
  *
  * @author hcadavid
  */
-public abstract class ServiciosForo {
+public abstract class ServiciosForo  implements Serializable{
     
     
     private static ServiciosForo instance=new ServiciosForoStub();
@@ -95,6 +96,6 @@ public abstract class ServiciosForo {
      * @throws ExcepcionServiciosForos si ya hay usuario asociado al correo
      * ingresado
      */
-    public abstract void registrarUsuario(String email,String name) throws ExcepcionServiciosForos;
+    public abstract void registrarUsuario(Usuario us) throws ExcepcionServiciosForos;
        
 }

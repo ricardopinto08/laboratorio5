@@ -23,6 +23,9 @@ import edu.eci.pdsw.samples.services.ExcepcionServiciosForos;
 import edu.eci.pdsw.samples.services.ServiciosForo;
 import edu.eci.pdsw.samples.services.ServiciosForoStub;
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -35,8 +38,8 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class RegistroForosBean implements Serializable{
     
-    private ServiciosForo prin;
-    private String date;    
+    ServiciosForo foros=ServiciosForo.getInstance();
+    EntradaForo foroSelection;
     private String emailUs;
     private String nombreUs,CommentUs,Title;
 
@@ -56,14 +59,6 @@ public class RegistroForosBean implements Serializable{
         this.CommentUs = CommentUs;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getEmailUs() {
         return emailUs;
     }
@@ -80,8 +75,6 @@ public class RegistroForosBean implements Serializable{
         this.nombreUs = nombreUs;
     }
     
-    ServiciosForo foros=ServiciosForo.getInstance();
-    EntradaForo foroSelection;
 
     public EntradaForo getForoSelection() {
         return foroSelection;
@@ -100,8 +93,16 @@ public class RegistroForosBean implements Serializable{
         foroSelection=null;
     }
     
-    public void registrarNuevoForo(){
+    public void registrarNuevoForo() throws ExcepcionServiciosForos{
+        Usuario us=null;
+        try {
+             us = new Usuario(emailUs,nombreUs);
+             foros.registrarUsuario(us);
+             foros.registrarNuevaEntradaForo(new EntradaForo(0, us, CommentUs, Title,new Date(new java.util.Date().getTime())));
+        } catch (Exception e) {
         
-        prin.registrarNuevaEntradaForo(foroSelection);
+        }
+       
+        
     }
 }

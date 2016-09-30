@@ -19,6 +19,7 @@ package edu.eci.pdsw.samples.services;
 import edu.eci.pdsw.samples.entities.Comentario;
 import edu.eci.pdsw.samples.entities.EntradaForo;
 import edu.eci.pdsw.samples.entities.Usuario;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,7 +32,7 @@ import java.util.logging.Logger;
  *
  * @author hcadavid
  */
-public class ServiciosForoStub extends ServiciosForo{
+public class ServiciosForoStub extends ServiciosForo  implements Serializable{
 
     private final Map<String,Usuario> usuarios;
     private final Map<Integer,EntradaForo> foros;
@@ -88,12 +89,12 @@ public class ServiciosForoStub extends ServiciosForo{
     }
     
     @Override
-    public void registrarUsuario(String email,String name) throws ExcepcionServiciosForos {
-        if (!usuarios.containsKey(email)){
-            usuarios.put(email,new Usuario(email,name));
+    public void registrarUsuario(Usuario us) throws ExcepcionServiciosForos {
+        if (!usuarios.containsKey(us.getEmail())){
+            usuarios.put(us.getEmail(),us);
         }
         else{
-            throw new ExcepcionServiciosForos("El correo "+email+" ya se encuentra registrado.");
+            throw new ExcepcionServiciosForos("El correo "+us.getEmail()+" ya se encuentra registrado.");
         }
                
         

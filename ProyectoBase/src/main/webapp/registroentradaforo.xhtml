@@ -6,24 +6,27 @@
 
     <h:body>
          <h:form>
-             <p:dataTable var="foro"  value="#{Foros.foros}" selectionMode="single" selection="#{Foros.foroSelection}" rowKey="#{foro}">
+             <p:dataTable id="ListaForos" var="foro"  value="#{Foros.foros}" selectionMode="single" selection="#{Foros.foroSelection}" rowKey="#{foro}">
+                 <p:ajax event="rowSelect" />
+                <p:ajax event="rowUnselect" />
                 <p:column headerText="Identificador">
                     <h:outputText value="#{foro.identificador}" />
                 </p:column>
-
                 <p:column headerText="Autor">
                     <h:outputText value="#{foro.autor.nombre}" />
                 </p:column>
-
                 <p:column headerText="Titulo">
                     <h:outputText value="#{foro.titulo}" />
                 </p:column>
                 <p:column headerText="Fecha y Hora">
                     <h:outputText value="#{foro.fechayHora}" />
                 </p:column>
+                <p:column>
+                    <p:commandButton action="registrorespuestaforo" icon="ui-icon-search" title="Ver Foro" value = "Ver Foro" >
+                    </p:commandButton>
+                </p:column>
             </p:dataTable>
-             <p:commandButton action="registrorespuestaforo" icon="ui-icon-search" title="Ver Foro" value = "Ver Foro" >
-            </p:commandButton>
+             
             <h:panelGrid columns="2" cellpadding="4">
                 <p:outputLabel for="name" value="Nombre:" />
                 <p:inputText id="name" value="#{Foros.nombreUs}"/>
@@ -38,7 +41,7 @@
                 <p:inputText id="Title" value="#{Foros.title}"/>
 
                 <p:commandButton value="Reset" type="reset" />
-                <p:commandButton value="Añadir nuevo Foro" update="form" actionListener="#{}"/>
+                <p:commandButton value="Añadir nuevo Foro" update="ListaForos" actionListener="#{Foros.registrarNuevoForo()}"/>
             </h:panelGrid>
         </h:form>
    </h:body>
