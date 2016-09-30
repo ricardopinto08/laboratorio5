@@ -133,9 +133,13 @@ public class RegistroForosBean implements Serializable{
              foros.registrarUsuario(us);
              foros.registrarNuevaEntradaForo(new EntradaForo(0, us, CommentUs, Title,new Date(new java.util.Date().getTime())));
         } catch (Exception e) {
-            System.err.println("excepcionnnnn");
         }
+        restablecerVar();
        
         
+    }
+
+    private void restablecerVar() {
+        emailUs=null;nombreUs=null;CommentUs=null;Title=null;
     }
 }
