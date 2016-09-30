@@ -48,4 +48,8 @@ public class RegistroForosBean implements Serializable{
     public List<EntradaForo> getForos() throws ExcepcionServiciosForos{
         return foros.consultarEntradasForo();
     }
+    
+    public void limpiar(){
+        foroSelection=null;
+    }
 }

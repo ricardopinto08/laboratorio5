@@ -89,16 +89,22 @@ public class ServiciosForoStub extends ServiciosForo{
     
     
     private void cargarDatosEstaticos(Map<String,Usuario> usuarios,Map<Integer,EntradaForo> foros){
-        usuarios.put("juan.perez@gmail.com", new Usuario("juan.perez@gmail.com", "Juan Perez"));
+        Usuario juan = new Usuario("juan.perez@gmail.com", "Juan Perez");
+        usuarios.put("juan.perez@gmail.com", juan);
         usuarios.put("juan.rodriguez@gmail.com", new Usuario("juan.rodriguez@gmail.com", "Juan Rodriguez"));
         usuarios.put("luisa.perez@gmail.com", new Usuario("luisa.perez@gmail.com", "Luisa Perez"));
         
         EntradaForo ef=new EntradaForo(0, usuarios.get("juan.perez@gmail.com"),"Por que el agua moja?", "Super interrogante", java.sql.Date.valueOf("2000-01-01"));
+
         try {
             registrarNuevaEntradaForo(ef);
         } catch (ExcepcionServiciosForos ex) {
             Logger.getLogger(ServiciosForoStub.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
+        }
+        try {
+            agregarRespuestaForo(0, new Comentario(juan, "Hola como estan", java.sql.Date.valueOf("2001-11-11"))); 
+        } catch (ExcepcionServiciosForos ex) {
         }
         
     }

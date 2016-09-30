@@ -17,7 +17,9 @@
 package edu.eci.pdsw.samples.entities;
 
 import java.sql.Date;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 /**
@@ -38,6 +40,9 @@ public class EntradaForo {
     
     private Date fechayHora;
 
+    private LinkedList<Comentario> respuestasArreglo;
+
+    
     public EntradaForo() {
     }
     
@@ -101,6 +106,13 @@ public class EntradaForo {
         this.fechayHora = fechayHora;
     }
 
+    public LinkedList<Comentario> getRespuestasArreglo() {
+        LinkedList<Comentario> temporal = new LinkedList<>(getRespuestas());
+        return temporal;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "EntradaForo{" + "identificador=" + identificador + ", autor=" + autor + ", comentario=" + comentario + ", respuestas=" + respuestas + ", titulo=" + titulo + ", fechayHora=" + fechayHora + '}';

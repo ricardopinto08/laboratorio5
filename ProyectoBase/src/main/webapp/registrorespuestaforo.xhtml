@@ -6,13 +6,26 @@
 
     <h:body>
         <h:form>
-            <h:outputText value="#{Foros.foroSelection.titulo}" style="font-size-adjust: 3" ></h:outputText> 
+            <h:outputText value="#{Foros.foroSelection.titulo}" style="font-size-adjust: 4" ></h:outputText> 
             <br></br>
             <h:outputText value="Autor: #{Foros.foroSelection.autor}" style="color: gray " ></h:outputText>
             <br></br>
             <h:outputText value="#{Foros.foroSelection.fechayHora}" style="color: gray" ></h:outputText>
             <br></br>
             <h:outputText value="#{Foros.foroSelection.comentario}"></h:outputText>
+            <p:dataTable var="ans" value ="#{Foros.foroSelection.respuestasArreglo}">
+                <p:column headerText="Autor">
+                    <h:outputText value="#{ans.autor}" />
+                </p:column>
+                <p:column headerText="Contenido">
+                    <h:outputText value="#{ans.contenido}" />
+                </p:column>
+                <p:column headerText="Fecha">
+                    <h:outputText value="#{ans.fechayHora}" />
+                </p:column>
+            </p:dataTable>
+            <p:commandButton action="registroentradaforo" icon="ui-icon-left-bold" title="Volver a foros"  value="Volver a foros" actionListener="#{Foros.limpiar()}">
+            </p:commandButton>
         </h:form>
         
         
