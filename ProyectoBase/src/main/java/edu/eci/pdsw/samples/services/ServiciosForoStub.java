@@ -87,6 +87,18 @@ public class ServiciosForoStub extends ServiciosForo{
         
     }
     
+    @Override
+    public void registrarUsuario(String email,String name) throws ExcepcionServiciosForos {
+        if (!usuarios.containsKey(email)){
+            usuarios.put(email,new Usuario(email,name));
+        }
+        else{
+            throw new ExcepcionServiciosForos("El correo "+email+" ya se encuentra registrado.");
+        }
+               
+        
+    }
+    
     
     private void cargarDatosEstaticos(Map<String,Usuario> usuarios,Map<Integer,EntradaForo> foros){
         Usuario juan = new Usuario("juan.perez@gmail.com", "Juan Perez");

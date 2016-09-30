@@ -89,7 +89,12 @@ public abstract class ServiciosForo {
      */
     public abstract Usuario consultarUsuario(String email) throws ExcepcionServiciosForos;
     
-    
-    
+    /**
+     * Ingresar un usuario 
+     * @param email el correo con el cual el usuario se registrara
+     * @throws ExcepcionServiciosForos si ya hay usuario asociado al correo
+     * ingresado
+     */
+    public abstract void registrarUsuario(String email,String name) throws ExcepcionServiciosForos;
        
 }

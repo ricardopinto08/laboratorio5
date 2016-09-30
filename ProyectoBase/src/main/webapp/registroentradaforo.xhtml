@@ -24,7 +24,22 @@
             </p:dataTable>
              <p:commandButton action="registrorespuestaforo" icon="ui-icon-search" title="Ver Foro" value = "Ver Foro" >
             </p:commandButton>
-           
+            <h:panelGrid columns="2" cellpadding="4">
+                <p:outputLabel for="name" value="Nombre:" />
+                <p:inputText id="name" value="#{Foros.nombreUs}"/>
+
+                <p:outputLabel for="email" value="Email:" />
+                <p:inputText id="email" value="#{Foros.emailUs}"/>
+                
+                <p:outputLabel for="Comment" value="Comentario:" />
+                <p:inputText id="Comment" value="#{Foros.commentUs}"/>
+
+                <p:outputLabel for="Title" value="Titulo:" />
+                <p:inputText id="Title" value="#{Foros.title}"/>
+
+                <p:commandButton value="Reset" type="reset" />
+                <p:commandButton value="Añadir nuevo Foro" update="form" actionListener="#{}"/>
+            </h:panelGrid>
         </h:form>
    </h:body>
 

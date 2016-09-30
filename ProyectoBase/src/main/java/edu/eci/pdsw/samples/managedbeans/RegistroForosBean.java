@@ -18,8 +18,10 @@ package edu.eci.pdsw.samples.managedbeans;
 
 
 import edu.eci.pdsw.samples.entities.EntradaForo;
+import edu.eci.pdsw.samples.entities.Usuario;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosForos;
 import edu.eci.pdsw.samples.services.ServiciosForo;
+import edu.eci.pdsw.samples.services.ServiciosForoStub;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -32,6 +34,51 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean (name= "Foros")
 @SessionScoped
 public class RegistroForosBean implements Serializable{
+    
+    private ServiciosForo prin;
+    private String date;    
+    private String emailUs;
+    private String nombreUs,CommentUs,Title;
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String Title) {
+        this.Title = Title;
+    }
+
+    public String getCommentUs() {
+        return CommentUs;
+    }
+
+    public void setCommentUs(String CommentUs) {
+        this.CommentUs = CommentUs;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getEmailUs() {
+        return emailUs;
+    }
+
+    public void setEmailUs(String emailUs) {
+        this.emailUs = emailUs;
+    }
+
+    public String getNombreUs() {
+        return nombreUs;
+    }
+
+    public void setNombreUs(String nombreUs) {
+        this.nombreUs = nombreUs;
+    }
     
     ServiciosForo foros=ServiciosForo.getInstance();
     EntradaForo foroSelection;
@@ -51,5 +98,10 @@ public class RegistroForosBean implements Serializable{
     
     public void limpiar(){
         foroSelection=null;
+    }
+    
+    public void registrarNuevoForo(){
+        
+        prin.registrarNuevaEntradaForo(foroSelection);
     }
 }
