@@ -37,6 +37,8 @@ public class ServiciosForoStub extends ServiciosForo implements Serializable{
 
 
     private final Map<String,Usuario> usuarios;
+
+    
     private final Map<Integer,EntradaForo> foros;
     private static int foroidcount=0;
 
@@ -67,7 +69,11 @@ public class ServiciosForoStub extends ServiciosForo implements Serializable{
         }
         foros.put(f.getIdentificador(), f);        
     }
-
+    
+    public Map<String, Usuario> getUsuarios() {
+        return usuarios;
+    }
+    
     @Override
     public void agregarRespuestaForo(int idforo, Comentario c) throws ExcepcionServiciosForos {
         try{

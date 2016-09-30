@@ -21,6 +21,7 @@ import edu.eci.pdsw.samples.entities.EntradaForo;
 import edu.eci.pdsw.samples.entities.Usuario;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -43,6 +44,8 @@ public abstract class ServiciosForo implements Serializable{
     }
 
 
+    public abstract Map<String, Usuario> getUsuarios();
+    
     /**
      * Consulta todas las entradas al foro registradas
      * @return el conjunto de las entradas al foro disponibles

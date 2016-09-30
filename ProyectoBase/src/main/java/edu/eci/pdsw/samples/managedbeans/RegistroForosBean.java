@@ -121,6 +121,9 @@ public class RegistroForosBean implements Serializable{
     }
            
     public void registrarNuevoComentarioForo(int idForo) throws ExcepcionServiciosForos{
+        if(!foros.getUsuarios().containsValue(usuarioTemporal)){
+            foros.registrarUsuario(usuarioTemporal.getEmail(), usuarioTemporal.getNombre());
+        }
         foros.agregarRespuestaForo(idForo, comentarioTemporal);
         usuarioTemporal= new Usuario("", "");
         comentarioTemporal = new Comentario(usuarioTemporal, "",java.sql.Date.valueOf("2000-01-01")); 
