@@ -46,6 +46,7 @@ public class RegistroForosBean implements Serializable{
     private String nombreUs,CommentUs,Title;
     private Comentario comentarioTemporal;
     private Usuario usuarioTemporal;
+    private int cont=0;
     ServiciosForo foros=ServiciosForo.getInstance();
     EntradaForo foroSelection;
     
@@ -126,7 +127,8 @@ public class RegistroForosBean implements Serializable{
                 foros.registrarUsuario(usuarioTemporal);
             }
             foros.agregarRespuestaForo(idForo, comentarioTemporal);
-            usuarioTemporal= new Usuario("", "");
+            usuarioTemporal= new Usuario("Anonimo"+cont+"@gmail.com", "");
+            cont++;
             comentarioTemporal = new Comentario(usuarioTemporal, "",new Date(new java.util.Date().getTime())); 
         }
     }
@@ -134,9 +136,11 @@ public class RegistroForosBean implements Serializable{
     public void registrarNuevoForo() throws ExcepcionServiciosForos{
         Usuario us=null;
         try {
-             us = new Usuario(emailUs,nombreUs);
-             foros.registrarUsuario(us);
-             foros.registrarNuevaEntradaForo(new EntradaForo(0, us, CommentUs, Title,new Date(new java.util.Date().getTime())));
+            if(!(emailUs.equals("")||nombreUs.equals(""))){
+                us = new Usuario(emailUs,nombreUs);
+                foros.registrarUsuario(us);
+                foros.registrarNuevaEntradaForo(new EntradaForo(0, us, CommentUs, Title,new Date(new java.util.Date().getTime())));
+            }
         } catch (Exception e) {
         }
         restablecerVar();
